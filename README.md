@@ -1,3 +1,3 @@
-# App Tinder Clone
+# App Movies
 
 #### Aprendendo ViewCode
