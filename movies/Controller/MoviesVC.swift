@@ -8,20 +8,25 @@
 
 import UIKit
 
-class MoviesVC: UICollectionViewController {
+class MoviesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    let cellID = "cellID"
+    var movies: [Movie] = []
     
     init(){
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("in it(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: cellID)
+        
         navigationController?.navigationBar.prefersLargeTitles = false
         
         let headerView = UIView()
@@ -32,5 +37,43 @@ class MoviesVC: UICollectionViewController {
         
         headerView.addSubview(imageView)
         navigationItem.titleView = headerView
+        
+        self.searchMovies()
     }
+}
+
+extension MoviesVC {
+    func searchMovies(){
+        self.movies = MovieService.shared.searchMovies()
+        self.collectionView.reloadData()
+    }
+}
+
+extension MoviesVC {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.movies.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! MovieCell
+        cell.movie = self.movies[indexPath.item]
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.bounds.width / 2 - 32
+        let height = width * 1.8
+        
+        return .init(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: 24, left: 24, bottom: 24, right: 24)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 24
+    }
+    
 }
