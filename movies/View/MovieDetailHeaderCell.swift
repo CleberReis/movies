@@ -55,7 +55,7 @@ class MovieDetailHeaderCell: UICollectionViewCell {
         stackView.topAnchor.constraint(equalTo: topAnchor, constant: 24).isActive = true
         stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24).isActive = true
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24).isActive = true
-        stackView.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: -24).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24).isActive = true
     }
     
     required init?(coder: NSCoder) {

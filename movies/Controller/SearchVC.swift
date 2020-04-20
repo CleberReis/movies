@@ -57,4 +57,14 @@ extension SearchVC {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 105
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        
+        let movie = self.movies[indexPath.item]
+        let movieDetailVC = MovieDetailVC()
+        movieDetailVC.movie = movie
+        self.navigationController?.pushViewController(movieDetailVC, animated: true)
+        
+    }
 }

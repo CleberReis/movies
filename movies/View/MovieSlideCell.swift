@@ -34,9 +34,10 @@ class MovieSlideCell: UICollectionViewCell {
         
         addSubview(thumbImageView)
         thumbImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        thumbImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
         thumbImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         thumbImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-        thumbImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+
     }
     
     required init?(coder: NSCoder) {

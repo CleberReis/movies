@@ -12,9 +12,7 @@ class MovieDetailVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     
     var movie: Movie? {
         didSet{
-            if let movie = movie {
-                self.collectionView.reloadData()
-            }
+            self.collectionView.reloadData()
         }
     }
     
@@ -24,6 +22,9 @@ class MovieDetailVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
+        
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationController?.navigationItem.largeTitleDisplayMode = .never
     }
     
     required init?(coder: NSCoder) {

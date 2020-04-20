@@ -19,8 +19,6 @@ class BaseTabBar: UITabBarController {
             addNavController(viewController: UIViewController(), title: "Favoritos", icon: "favorito")
         ]
         
-        selectedIndex = 1
-        
         tabBar.tintColor = UIColor(red: 253/255, green: 89/255, blue: 35/255, alpha: 1)
         tabBar.unselectedItemTintColor = UIColor.darkGray
         tabBar.barTintColor = UIColor.white
@@ -33,6 +31,8 @@ class BaseTabBar: UITabBarController {
         let navController = UINavigationController(rootViewController: viewController)
         navController.navigationBar.barTintColor = .white
         navController.navigationBar.prefersLargeTitles = true
+        navController.navigationBar.tintColor = UIColor(red: 253/255, green: 89/255, blue: 35/255, alpha: 1)
+        navController.navigationBar.shadowImage = UIImage()
         
         viewController.navigationItem.title = title
         viewController.tabBarItem.title = title

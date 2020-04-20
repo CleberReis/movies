@@ -3,4 +3,19 @@
    uuid = "759B10BA-D113-465B-9D37-744426063078"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "0C3CFDCF-BF3E-4091-AB11-D6E0AB34D6D7"
+            shouldBeEnabled = "Yes"
+            nameForDebugger = "UIStackView"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            moduleName = "">
+            <Locations>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
