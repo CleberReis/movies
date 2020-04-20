@@ -20,6 +20,7 @@ class MovieDetailVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     
     let headerId = "headerId"
     let descriptionId = "descriptionId"
+    let slideId = "slideId"
     
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -35,13 +36,14 @@ class MovieDetailVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         collectionView.backgroundColor = .white
         collectionView.register(MovieDetailHeaderCell.self, forCellWithReuseIdentifier: headerId)
         collectionView.register(MovieDetailDescriptionCell.self, forCellWithReuseIdentifier: descriptionId)
+        collectionView.register(MovieDetailSlideCell.self, forCellWithReuseIdentifier: slideId)
         
     }
 }
 
 extension MovieDetailVC {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -52,8 +54,14 @@ extension MovieDetailVC {
             return cell
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: descriptionId, for: indexPath) as! MovieDetailDescriptionCell
-        cell.movie = self.movie
+        if indexPath.item == 1 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: descriptionId, for: indexPath) as! MovieDetailDescriptionCell
+            cell.movie = self.movie
+            return cell
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: slideId, for: indexPath) as! MovieDetailSlideCell
+    
         return cell
     
     }

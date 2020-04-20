@@ -15,9 +15,11 @@ class BaseTabBar: UITabBarController {
                 
         viewControllers = [
             addNavController(viewController: MoviesVC(), title: "Filmes", icon: "filme"),
-            addNavController(viewController: UIViewController(), title: "Procurar", icon: "explorar"),
+            addNavController(viewController: SearchVC(), title: "Procurar", icon: "explorar"),
             addNavController(viewController: UIViewController(), title: "Favoritos", icon: "favorito")
         ]
+        
+        selectedIndex = 1
         
         tabBar.tintColor = UIColor(red: 253/255, green: 89/255, blue: 35/255, alpha: 1)
         tabBar.unselectedItemTintColor = UIColor.darkGray
