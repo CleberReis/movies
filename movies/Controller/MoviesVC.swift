@@ -76,4 +76,13 @@ extension MoviesVC {
         return 24
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let movie = self.movies[indexPath.item]
+        let movieDetailVC = MovieDetailVC()
+        movieDetailVC.movie = movie
+        self.navigationController?.pushViewController(movieDetailVC, animated: true)
+        
+    }
+    
 }
