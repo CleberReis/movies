@@ -14,11 +14,13 @@ class SearchVC: UITableViewController, UISearchBarDelegate {
     let cellId = "cellId"
     var movies: [Movie] = []
     var moviesSearch: [Movie] = []
+    var isSearch: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(SearchCell.self, forCellReuseIdentifier: cellId)
+        tableView.tableFooterView = UIView()
         
         self.configSearchBar()
         self.searchMovies()
@@ -47,13 +49,42 @@ extension SearchVC {
 
 extension SearchVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return moviesSearch.count
+        
+        if !isSearch {
+            return movies.count
+        } else {
+            let count = self.moviesSearch.count
+            if count == 0 {
+                let textLabel: UILabel = {
+                    let label = UILabel()
+                    label.text = "Não foi encontrado nenhum filme."
+                    label.textAlignment = .center
+                    label.textColor = .darkText
+                    label.font = UIFont.systemFont(ofSize: 16)
+                    label.numberOfLines = 0
+                    
+                    return label
+                }()
+                
+                tableView.backgroundView = textLabel
+                
+            } else {
+                tableView.backgroundView = nil
+            }
+            
+            return count
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SearchCell
-        cell.movie = self.movies[indexPath.row]
         
+        if !isSearch {
+            cell.movie = self.movies[indexPath.row]
+        } else {
+            cell.movie = self.moviesSearch[indexPath.row]
+        }
         return cell
     }
     
@@ -75,14 +106,23 @@ extension SearchVC {
         
         guard !searchText.isEmpty else {
             moviesSearch = movies
+            self.isSearch = false
             tableView.reloadData()
             return
         }
-
+        
+//        moviesSearch = movies.filter({$0.title.lowercased().contains(searchText.lowercased())})
+        
         moviesSearch = movies.filter({ (movie) -> Bool in
             movie.title.lowercased().contains(searchText.lowercased())
         })
         
+        if moviesSearch.count > 0 {
+            self.isSearch = true
+        } else {
+//            self.isSearch = false
+        }
+
         self.tableView.reloadData()
     }
     
@@ -90,5 +130,5 @@ extension SearchVC {
         moviesSearch = movies
         tableView.reloadData()
     }
-    
+
 }
